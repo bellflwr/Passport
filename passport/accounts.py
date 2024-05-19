@@ -34,4 +34,4 @@ def create_account(name: str) -> None:
 
     accounts[name] = account
 
-    write_accounts()
+    write_accounts(accounts)
