@@ -1,37 +1,36 @@
 import json
 import tomllib
 
+
 def load_file(file):
     with open(f"./data/{file}.json", "r") as f:
         return json.load(f)
+
 
 def post_file(data, file):
     with open(f"./data/{file}.json", "w") as f:
         json.dump(data, f, indent=4)
 
+
 def load_settings():
     with open("./data/settings.toml", "rb") as f:
         return tomllib.load(f)
 
+
 def make_settings():
     with open("./data/settings.toml", "w") as f:
-        f.write("minimumTickets = 0\nticketsPerRaffle = 10\n\n day = 1\ndayOneMax = 10\ndayTwoMax = 8\ndayThreeMax = 5\ndayFourMax = 9")
+        f.write(
+            """minimumTickets = 0
+ticketsPerRaffle = 10
 
-def total_points(temp:dict, key:str):
-    total:int = 0
-    print(temp)
-    person = temp[key]
-    total += person["dayOne"]
-    total += person["dayTwo"]
-    total += person["dayThree"]
-    total += person["dayFour"]
-    total += person["bonusOne"]
-    total += person["bonusTwo"]
-    total += person["bonusThree"]
-    return total
+day = 1
+
+max_points = [10, 8, 5, 9]"""
+        )
 
 
-def order(person:dict):
+def order(person: dict):
+    return person
     reordered_list = {}
     keys = list(person.keys())
     for i in range(len(person)):

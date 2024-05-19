@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounts</title>
-    <link rel="stylesheet" href="/static/styles/style.css">
-    <link rel="stylesheet" href="/static/styles/accounts.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-    <form action="/" class="inline">
-      <button class="btn"><i class="fa fa-home"></i></button>
-    </form>
-    <button class="add-account" id="add-account">Add Account</button>
-    <p><b>Person<span class="right-side">Tickets</span></b></p>
-    <hr>
-    {% for person in cache %}
-      <form method="post">
-        <input type="hidden" name="_method" value="PUT">
-        <input type="hidden" name="name" value="{{ person }}">
-          <p class="inline list">{{ person }}</p>
-          <button class="clear"><i class="fa fa-trash"></i></button>
-          <span class="right-side list">{{ cache[person] }}</span>
-      </form>
-    {% endfor %}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Accounts</title>
+        <link rel="stylesheet" href="/static/styles/style.css" />
+        <link rel="stylesheet" href="/static/styles/accounts.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+    <body>
+        <form action="/" class="inline">
+            <button class="btn"><i class="fa fa-home"></i></button>
+        </form>
+        <button class="add-account" id="add-account">Add Account</button>
+        <p>
+            <b>Person<span class="right-side">Tickets</span></b>
+        </p>
+        <hr />
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>Who would you like to add?</p>
-          <form method="post" class="form" id="form">
-            <input type="text" name="name">
-            <button class="add" id="add">add</button>
-          </form>
-        </div>      
-    </div>
-    
-    <script src="/static/accounts.js"></script>
-</body>
+        {% for person in accounts %}
+        <form action="/delete/{{ person }}" method="post">
+            <p class="inline list">{{ person }}</p>
+            <button class="clear"><i class="fa fa-trash"></i></button>
+            <span class="right-side list">{{ accounts[person] }}</span>
+        </form>
+        {% endfor %}
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Who would you like to add?</p>
+                <form method="post" class="form" id="form">
+                    <input type="text" name="name" />
+                    <button class="add" id="add">add</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="/static/accounts.js"></script>
+    </body>
 </html>

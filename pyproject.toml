@@ -12,6 +12,8 @@ flask = "^3.0.3"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.4"
+black = "^24.4.2"
+mypy = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core"]
