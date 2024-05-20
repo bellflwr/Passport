@@ -10,7 +10,6 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "passport:app",
                 "FLASK_DEBUG": "1"
             },
             "args": [

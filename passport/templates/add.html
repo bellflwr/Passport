@@ -1,31 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Adding</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}
+    Adding
+{% endblock %}
+{% block content %}
     <form action="/" class="inline">
         <button class="btn"><i class="fa fa-home"></i></button>
     </form>
     <form method="post">
         <p class="looks">
-            <span class="looks">Worth: <span id="worth-num" name="worth-num">1</span>pt</span>
-            <input type="radio" value="1" name="worth" id="worth" class="worth" checked>
-            <input type="radio" value="2" name="worth" id="worth" class="worth">
-            <input type="radio" value="3" name="worth" id="worth" class="worth">
-            <input type="radio" value="4" name="worth" id="worth" class="worth">
-            <input type="radio" value="5" name="worth" id="worth" class="worth">
+            <span class="looks"
+                >Worth:
+                <span id="worth-num" name="worth-num">1</span>pt</span
+            >
+            <input
+                type="radio"
+                value="1"
+                name="worth"
+                id="worth"
+                class="worth"
+                checked
+            />
+            <input
+                type="radio"
+                value="2"
+                name="worth"
+                id="worth"
+                class="worth"
+            />
+            <input
+                type="radio"
+                value="3"
+                name="worth"
+                id="worth"
+                class="worth"
+            />
+            <input
+                type="radio"
+                value="4"
+                name="worth"
+                id="worth"
+                class="worth"
+            />
+            <input
+                type="radio"
+                value="5"
+                name="worth"
+                id="worth"
+                class="worth"
+            />
         </p>
-        <input type="text" name="name" id="name" class="block">
+        <input type="text" name="name" id="name" class="block" />
         <button class="add">add</button>
     </form>
-    {{ message }}
-    {{ error }}
+    {{ message }} {{ error }}
 
     <script src="/static/add.js"></script>
-</body>
-</html>
+{% endblock %}

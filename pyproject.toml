@@ -6,14 +6,37 @@ authors = ["Andrei <142443853+hjzres@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 flask = "^3.0.3"
+rich = "^13.7.1"
 
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.4"
 black = "^24.4.2"
 mypy = "^1.10.0"
+
+
+
+[tool.poetry.group.deploy.dependencies]
+gunicorn = "^22.0.0"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = ["F401"]
 
 [build-system]
 requires = ["poetry-core"]
