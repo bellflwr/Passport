@@ -142,7 +142,9 @@ def add():
         worth = int(request.form["worth"])
 
         account = load_account(name)
-
+        if account is None:
+            flash(f'Account with name "{name}" doesn\'t exist!', "error")
+            return render_template("add.html")
         day = str(DAY)
         max_points = MAX_POINTS[int(day) - 1]
 
