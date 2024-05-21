@@ -13,7 +13,7 @@
     <hr />
 
     {% for person in accounts %}
-    <form action="{{ url_for('accounts.delete_account_route', name=person) }}" method="post">
+    <form action="{{ url_for('accounts.delete_account_route', name=person[0]) }}" method="post">
         <p class="inline list">{{ person[0] }}</p>
         <button class="clear"><i class="fa fa-trash"></i></button>
         <span class="right-side list">{{ person[1] }}</span>
@@ -25,7 +25,7 @@
             <span class="close">&times;</span>
             <p>Who would you like to add?</p>
             <form method="post" class="form" id="form">
-                <input type="text" name="name" />
+                <input type="text" name="name" autocomplete="off"/>
                 <button class="add" id="add">add</button>
             </form>
         </div>
