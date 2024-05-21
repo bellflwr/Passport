@@ -11,6 +11,7 @@ from .settings import (
     MIN_TICKETS,
     TICKETS_PER_RAFFLE,
 )
+from .accounts import total_points
 
 bp = Blueprint("home", __name__, url_prefix="/")
 
@@ -18,19 +19,6 @@ bp = Blueprint("home", __name__, url_prefix="/")
 @bp.route("/")
 def home():
     return render_template("home.html", day=DAY)
-
-
-def total_points(account: dict):
-    total: int = 0
-
-    for k, v in account.items():
-        total += v
-
-        if int(k) < DAYS and MAX_POINTS[int(k - 1)]:
-            total += BONUS_POINTS
-
-    return total
-
 
 @bp.route("/raffle")
 def raffle():

@@ -4,6 +4,14 @@ from flask import Blueprint, flash, g, redirect, render_template, request, url_f
 
 from .logger import logger
 from .settings import DATA_FOLDER, DAY, DAYS, MAX_POINTS
+from .settings import (
+    BONUS_POINTS,
+    DAY,
+    DAYS,
+    MAX_POINTS,
+    MIN_TICKETS,
+    TICKETS_PER_RAFFLE,
+)
 
 bp = Blueprint("accounts", __name__, url_prefix="/accounts")
 
@@ -50,6 +58,17 @@ def load_account(name: str) -> dict | None:
     accounts = load_accounts()
     return accounts.get(name, None)
 
+def total_points(account: dict):
+    total: int = 0
+
+    for k, v in account.items():
+        total += v
+
+        if int(k) < DAYS and MAX_POINTS[int(k) - 1] == v:
+            total += BONUS_POINTS
+
+    return total
+
 
 def write_account(name: str, val: dict) -> None:
     accounts = load_accounts()
@@ -94,8 +113,13 @@ def accounts():
             logger.info('User "%s" was created', name)
         except AccountAlreadyExists:
             flash(f'Account with name "{name}" already exists!', "error")
+    updatedAccounts = {}
+    for name, account in accounts.items():
+        print(name)
+        print(account)
+        updatedAccounts[name] = total_points(account)
 
-    return render_template("accounts.html", accounts=accounts)
+    return render_template("accounts.html", accounts=updatedAccounts)
 
 
 @bp.route("/delete/<name>", methods=["POST"])
@@ -120,7 +144,7 @@ def add():
         account = load_account(name)
 
         day = str(DAY)
-        max_points = MAX_POINTS[int(day)]
+        max_points = MAX_POINTS[int(day) - 1]
 
         account[day] += worth
         if account[day] > max_points:
