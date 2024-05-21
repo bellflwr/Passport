@@ -52,7 +52,7 @@
         <input type="text" name="name" id="name" class="block" list="names" autocomplete="off"/>
         
         <datalist id="names">
-            {% for name in names %}
+            {% for name in names | sort() %}
                 <option value="{{ name }}"></option>
             {% endfor %}
         </datalist>
