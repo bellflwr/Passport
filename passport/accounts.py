@@ -113,13 +113,17 @@ def accounts():
             logger.info('User "%s" was created', name)
         except AccountAlreadyExists:
             flash(f'Account with name "{name}" already exists!', "error")
-    updatedAccounts = {}
+    updated_accounts = []
     for name, account in accounts.items():
         print(name)
         print(account)
-        updatedAccounts[name] = total_points(account)
+        updated_accounts.append((name, total_points(account)))
+    print(updated_accounts)
+    updated_accounts.sort(key=lambda a: a[1], reverse=True)
+    print(updated_accounts)
+    
 
-    return render_template("accounts.html", accounts=updatedAccounts)
+    return render_template("accounts.html", accounts=updated_accounts)
 
 
 @bp.route("/delete/<name>", methods=["POST"])
