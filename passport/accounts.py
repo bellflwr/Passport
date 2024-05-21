@@ -137,6 +137,8 @@ def delete_account_route(name):
 
 @bp.route("/add", methods=["GET", "POST"])
 def add():
+    names = list(load_accounts().keys())
+    
     if request.method == "POST":
         name = request.form["name"]
         worth = int(request.form["worth"])
@@ -144,7 +146,7 @@ def add():
         account = load_account(name)
         if account is None:
             flash(f'Account with name "{name}" doesn\'t exist!', "error")
-            return render_template("add.html")
+            return render_template("add.html", names=names)
         day = str(DAY)
         max_points = MAX_POINTS[int(day) - 1]
 
@@ -156,4 +158,4 @@ def add():
 
         logger.info('Added %s points to account "%s"', worth, name)
 
-    return render_template("add.html")
+    return render_template("add.html", names=names)

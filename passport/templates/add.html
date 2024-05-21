@@ -49,7 +49,14 @@
                 class="worth"
             />
         </p>
-        <input type="text" name="name" id="name" class="block" />
+        <input type="text" name="name" id="name" class="block" list="names" autocomplete="off"/>
+        
+        <datalist id="names">
+            {% for name in names %}
+                <option value="{{ name }}"></option>
+            {% endfor %}
+        </datalist>
+
         <button class="add">add</button>
     </form>
     {{ message }} {{ error }}
