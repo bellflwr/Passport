@@ -1,4 +1,4 @@
-import json
+import orjson
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 
@@ -34,8 +34,8 @@ class AccountAlreadyExists(Exception):
 
 
 def _load_accounts() -> dict[str, dict]:
-    with accounts_file.open(encoding="utf-8") as f:
-        return json.load(f)
+    with accounts_file.open("rb") as f:
+        return orjson.loads(f.read())
 
 
 def load_accounts() -> dict[str, dict]:
@@ -50,8 +50,8 @@ def mark_dirty() -> None:
 
 
 def write_accounts(accounts: dict) -> None:
-    with accounts_file.open("w", encoding="utf-8") as f:
-        json.dump(accounts, f)
+    with accounts_file.open("wb") as f:
+        f.write(orjson.dumps(accounts))
 
 
 def load_account(name: str) -> dict | None:
